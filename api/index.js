@@ -1,6 +1,8 @@
 import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose"
+import userRoutes from "./routes/user.routes.js"
+import authRoutes from "./routes/auth.routes.js"
 
 const app = express();
 
@@ -14,11 +16,21 @@ mongoose.connect(process.env.MONGO)
     console.log("MONGODB is not connected");
 })
 
+app.use(express.json())
 
-app.get("/", (req, res)=> {
-    res.send("GET request")
-})
+app.use("/api/user", userRoutes)
+app.use("/api/auth", authRoutes)
 
 app.listen(port, ()=>{
     console.log(`Serving at ${port}`);
+})
+app.use((err, req, res, next)=>{
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Invalid"
+
+    res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message
+    })
 })
