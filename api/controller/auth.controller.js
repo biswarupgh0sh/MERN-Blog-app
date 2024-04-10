@@ -26,13 +26,12 @@ export const signup = async (req, res, next) => {
 
   try {
     const response = await newUser.save();
-    res.status(200).json(response);
+    res.status(200).json("SignUp successful");
     console.log("response saved");
   } catch (error) {
     next(error);
   }
 };
-
 
 //will delete it later
 
