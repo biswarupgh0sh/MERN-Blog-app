@@ -86,7 +86,7 @@ export default function SignUp() {
                 className="font-bold"
               />
               <TextInput
-                placeholder="Password"
+                placeholder="***********"
                 id="password"
                 type="password"
                 onChange={handleChange}
