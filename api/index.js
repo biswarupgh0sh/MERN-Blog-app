@@ -34,6 +34,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).json({
     success: false,
     statusCode: err.statusCode,
+    stack: process.env.NODE_ENV === "development" ? err.stack : "",
     message: err.message,
   });
 });
