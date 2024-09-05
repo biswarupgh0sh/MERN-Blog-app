@@ -2,14 +2,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice.js";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
 import { OAuth } from "../components/OAuth.jsx";
-
-
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
-  const { loading, error: errorMessage} = useSelector(state => state.user)
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -30,14 +32,14 @@ export default function SignUp() {
       });
       const data = await res.json();
       if (data.success === false) {
-        dispatch(signInFailure(data.message))
+        dispatch(signInFailure(data.message));
       }
       if (res.ok) {
-        dispatch(signInSuccess(data))
+        dispatch(signInSuccess(data));
         navigate("/");
       }
     } catch (error) {
-      dispatch(signInFailure(error.message))
+      dispatch(signInFailure(error.message));
     }
   };
   return (
@@ -99,7 +101,7 @@ export default function SignUp() {
                 "Sign In"
               )}
             </Button>
-            <OAuth/>
+            <OAuth />
           </form>
           <div className="flex gap-1 text-sm mt-5">
             <span>Do not have an account?</span>

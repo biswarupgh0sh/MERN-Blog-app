@@ -39,11 +39,11 @@ export const signin = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password || email === "" || password === "") {
-    return next(errorHandler(400, "All "));
+    return next(errorHandler(400, "All fields are required!!"));
   }
 
   try {
-    const response = await user.findOne({ email: email });
+    const response = await user.findOne({ email });
 
     if (!response) {
       return next(errorHandler(400, "User not found"));
